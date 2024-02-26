@@ -1,4 +1,6 @@
-﻿services:
+﻿version: '3.7'
+
+services:
   selfhelp.api:
     image: selfhelp_api
     build:
@@ -7,4 +9,22 @@
     ports:
       - 5000:5000
     environment:
-      - ASPNETCORE_HTTP_PORT_URLS=http://+:5000
+      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_ENVIRONMENT=Development
+    container_name: self_help_api
+    depends_on:
+     - postgresql
+ 
+  postgresql:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 15s
+      timeout: 1s
+      start_period: 3s
+      retries: 3
+    container_name: self_help_db
