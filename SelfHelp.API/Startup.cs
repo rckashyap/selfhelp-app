@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Primitives;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
+using SelfHelp.Business.Abstraction;
+using SelfHelp.Business.Services;
+using SelfHelp.PostgreSql;
 
 namespace SelfHelp.API
 {
@@ -28,6 +32,11 @@ namespace SelfHelp.API
             services.AddSwaggerGen();
             services.AddControllers();
             services.AddHttpClient();
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(this.configuration.GetConnectionString("PostgresDbConnection"))
+            );
+
+            this.RegisterServices(services);
         }
 
         /// <summary>
@@ -37,10 +46,12 @@ namespace SelfHelp.API
         /// <param name="hostingEnvironment">Hosting environment.</param>
         /// <param name="lifetime">The host application lifetime instance.</param>
         /// <param name="logger">The logger instance.</param>
+        /// <param name="context">DB context.</param>
         public void Configure(IApplicationBuilder app,
             IWebHostEnvironment hostingEnvironment,
             IHostApplicationLifetime lifetime,
-            ILogger<IConfiguration> logger)
+            ILogger<IConfiguration> logger,
+            AppDbContext context)
         {
             if (hostingEnvironment.IsDevelopment())
             {
@@ -51,6 +62,8 @@ namespace SelfHelp.API
                         c.SwaggerEndpoint("v1/swagger.json", "SelfHelpAPI");
                     });
             }
+
+            context.Database.Migrate();
 
             app.UseRouting();
             app.UseHttpsRedirection();
@@ -66,6 +79,11 @@ namespace SelfHelp.API
             {
                 disposable.Dispose();
             });
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            services.AddTransient<IUserLoginService, UserLoginService>();
         }
     }
 }
