@@ -19,14 +19,14 @@ namespace SelfHelp.PostgreSql.Tables
         [Required]
         public required string Email { get; set; }
 
-        public string FirstName { get; set; } = string.Empty;
-
-        public string LastName { get; set; } = string.Empty;
-
         [Required]
         public required DateTime CreatedOn { get; set; }
 
-        public DateTime? UpdatedOn { get; set; }
+        public string? FirstName { get; set; } = string.Empty;
+
+        public string? LastName { get; set; } = string.Empty;
+
+        public DateTime? ModifiedOn { get; set; }
 
         public bool IsActive { get; set; } = false;
 

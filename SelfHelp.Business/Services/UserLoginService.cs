@@ -35,7 +35,6 @@ namespace SelfHelp.Business.Services
                 Password = user.Password,
                 IsActive = true,
                 CreatedOn = DateTime.UtcNow,
-                UpdatedOn = DateTime.UtcNow,
             };
 
             this.context.Add(userToAdd);

@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
+using Microsoft.OpenApi.Models;
 using SelfHelp.Business.Abstraction;
 using SelfHelp.Business.Services;
 using SelfHelp.PostgreSql;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace SelfHelp.API
 {
@@ -29,8 +32,18 @@ namespace SelfHelp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
-            services.AddControllers();
+            services.AddSwaggerGen(config =>
+            {
+                config.SwaggerDoc("v1", new OpenApiInfo { Title = "SelfHelpApi", Version = "v1" });
+                config.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "SelfHelpApi.xml"));
+                config.EnableAnnotations();
+            });
+            services.AddControllers().
+                AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                });
             services.AddHttpClient();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(this.configuration.GetConnectionString("PostgresDbConnection"))
@@ -84,6 +97,7 @@ namespace SelfHelp.API
         private void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IUserLoginService, UserLoginService>();
+            services.AddTransient<IChallengeService, ChallengeService>();
         }
     }
 }

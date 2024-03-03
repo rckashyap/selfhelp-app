@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SelfHelp.API</name>
+    </assembly>
+    <members>
+        <member name="P:SelfHelp.API.Models.ChallengeRequestV1Model.CreatedByUserId">
+            <summary>
+            The user identifier who is creating the challenge.
+            </summary>
+            <example>3</example>
+        </member>
+        <member name="P:SelfHelp.API.Models.ChallengeRequestV1Model.Title">
+            <summary>
+            Title of the challenge.
+            </summary>
+            <example>Keyboard challenge</example>
+        </member>
+        <member name="P:SelfHelp.API.Models.ChallengeRequestV1Model.Description">
+            <summary>
+            A breif description of the challenge.
+            </summary>
+            <example>Learn to type 250 words per min in 5 days</example>
+        </member>
+        <member name="P:SelfHelp.API.Models.ChallengeRequestV1Model.StartDate">
+            <summary>
+            Start date of the challenge.
+            </summary>
+        </member>
+        <member name="P:SelfHelp.API.Models.ChallengeRequestV1Model.DurationInDays">
+            <summary>
+            Number of days required to complete the challenge.
+            </summary>
+            <example>5</example>
+        </member>
+        <member name="P:SelfHelp.API.Models.ChallengeStepRequestV1Model.DayNumber">
+            <summary>
+            A number corresponding to each day of the challenge.
+            Describe which day to perform a certain task.
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:SelfHelp.API.Models.ChallengeStepRequestV1Model.Description">
+            <summary>
+            Detailed description of the goal/challenge to be achieved on the specified day.
+            </summary>
+            <example>Type 100 words per min.</example>
+        </member>
+        <member name="P:SelfHelp.API.Models.ChallengeStepsRequestV1Model.ChallengeId">
+            <summary>
+            The challenge identifier to which the steps will be added for.
+            </summary>
+            <example>3</example>
+        </member>
+        <member name="P:SelfHelp.API.Models.ChallengeStepsRequestV1Model.Steps">
+            <summary>
+            List of steps in the challenge.
+            </summary>
+        </member>
+        <member name="P:SelfHelp.API.Models.LoginUserV1Model.FirstName">
+            <example>John</example>
+        </member>
+        <member name="F:SelfHelp.API.Startup.configuration">
+            <summary>
+            Gets the configuration object.
+            </summary>
+        </member>
+        <member name="M:SelfHelp.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SelfHelp.API.Startup"/> class.
+            </summary>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.</param>
+        </member>
+        <member name="M:SelfHelp.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
+        </member>
+        <member name="M:SelfHelp.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Hosting.IHostApplicationLifetime,Microsoft.Extensions.Logging.ILogger{Microsoft.Extensions.Configuration.IConfiguration},SelfHelp.PostgreSql.AppDbContext)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">Application's request pipeline builder.</param>
+            <param name="hostingEnvironment">Hosting environment.</param>
+            <param name="lifetime">The host application lifetime instance.</param>
+            <param name="logger">The logger instance.</param>
+            <param name="context">DB context.</param>
+        </member>
+    </members>
+</doc>
