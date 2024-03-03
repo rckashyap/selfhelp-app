@@ -48,7 +48,7 @@ namespace SelfHelp.API.Controllers.Login
                 FirstName = registerUserV1Model.FirstName,
                 LastName = registerUserV1Model.LastName,
                 Password = registerUserV1Model.Password,
-                Gender = (Business.Entities.Enums.Gender)Enum.Parse(typeof(Gender), registerUserV1Model?.Gender.ToString()),
+                Gender = (Business.Entities.Enums.Gender)Enum.Parse(typeof(Gender), registerUserV1Model.Gender.ToString()),
             };
 
             var userId = this.loginService.AddUser(userEntity);

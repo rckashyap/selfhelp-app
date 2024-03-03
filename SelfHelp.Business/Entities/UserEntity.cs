@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SelfHelp.Business.Entities
 {
-    public class UserEntity
+    public class UserEntity : BaseEntity
     {
         public string UserName { get; set; }
 
